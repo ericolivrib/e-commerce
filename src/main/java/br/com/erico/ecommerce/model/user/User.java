@@ -2,6 +2,7 @@ package br.com.erico.ecommerce.model.user;
 
 import br.com.erico.ecommerce.model.BaseEntity;
 import br.com.erico.ecommerce.model.address.Address;
+import br.com.erico.ecommerce.model.order.Order;
 import br.com.erico.ecommerce.model.product.Product;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -43,11 +44,13 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private UserType type;
 
-    @ManyToOne
-    @JoinColumn(name = "address_id")
-    private Address address;
+    @OneToMany(mappedBy = "user")
+    private List<Address> addresses;
 
     @OneToMany(mappedBy = "seller")
     private List<Product> product;
+
+    @OneToMany(mappedBy = "customer")
+    private List<Order> orders;
 
 }

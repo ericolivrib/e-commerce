@@ -8,36 +8,35 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-import java.util.List;
-
 @Entity
-@Table(name = "delivery_addresses")
+@Table(name = "addresses")
 public class Address extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "Street name is mandatory")
+    @NotEmpty
     private String street;
 
-    @NotNull(message = "House number is mandatory")
+    @NotNull
     private Integer number;
 
-    @NotEmpty(message = "City is mandatory")
+    @NotEmpty
     private String city;
 
-    @NotEmpty(message = "State is mandatory")
+    @NotEmpty
     @Size(min = 2, max = 2, message = "State must have 2 letters")
     private String state;
 
-    @NotEmpty(message = "Zip code is mandatory")
-    @Pattern(regexp = "\\d{5}-\\d{3}", message = "Zip code must respect the pattern \"00000-000\"")
+    @NotEmpty
+    @Pattern(regexp = "\\d{5}-\\d{3}")
     private String zipCode;
 
     private String complement;
 
-    @OneToMany(mappedBy = "address")
-    private List<User> users;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }

@@ -1,12 +1,16 @@
 package br.com.erico.ecommerce.model.product;
 
 import br.com.erico.ecommerce.model.BaseEntity;
+import br.com.erico.ecommerce.model.category.Category;
+import br.com.erico.ecommerce.model.order.OrderItem;
 import br.com.erico.ecommerce.model.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -27,7 +31,6 @@ public class Product extends BaseEntity {
     private String description;
 
     @NotNull(message = "Price is mandatory")
-    @Pattern(regexp = "\\d+,\\d{2}", message = "Prime must respect the pattern \"0,00\"")
     private BigDecimal price;
 
     @NotNull(message = "Stock is mandatory")
@@ -38,4 +41,14 @@ public class Product extends BaseEntity {
     @JoinColumn(name = "seller_id")
     private User seller;
 
+    @OneToMany(mappedBy = "product")
+    private List<OrderItem> orderItems;
+
+    @ManyToMany
+    @JoinTable(
+            name = "product_categories",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private Set<Category> categories;
 }
