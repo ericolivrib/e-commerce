@@ -29,6 +29,7 @@ public class Payment extends BaseEntity {
 
     @NotNull
     @Enumerated(EnumType.STRING)
+    @Column(name = "payment_method")
     private PaymentMethod method;
 
     @NotNull
