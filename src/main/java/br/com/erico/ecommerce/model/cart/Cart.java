@@ -3,6 +3,7 @@ package br.com.erico.ecommerce.model.cart;
 import br.com.erico.ecommerce.model.BaseEntity;
 import br.com.erico.ecommerce.model.user.User;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,7 @@ public class Cart extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private User customer;

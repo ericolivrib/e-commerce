@@ -6,17 +6,16 @@ import br.com.erico.ecommerce.model.order.Order;
 import br.com.erico.ecommerce.model.product.Product;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -27,20 +26,20 @@ public class User extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "Name is mandatory")
+    @NotBlank
     private String name;
 
-    @Email(message = "Invalid e-mail")
-    @NotEmpty(message = "E-mail is mandatory")
+    @Email
+    @NotBlank
     private String email;
 
     // TODO: Include a password field
 
-    @NotEmpty(message = "Phone number is mandatory")
-    @Pattern(regexp = "(\\d{2}) \\d{5}-\\d{4}", message = "Phone number must respect the pattern \"(00) 00000-0000\"")
+    @NotBlank
+    @Pattern(regexp = "\\(\\d{2}\\) \\d{5}-\\d{4}")
     private String phone;
 
-    @NotEmpty(message = "Type is mandatory")
+    @NotNull
     @Enumerated(EnumType.STRING)
     private UserType type;
 
@@ -48,7 +47,7 @@ public class User extends BaseEntity {
     private List<Address> addresses;
 
     @OneToMany(mappedBy = "seller")
-    private List<Product> product;
+    private List<Product> products;
 
     @OneToMany(mappedBy = "customer")
     private List<Order> orders;

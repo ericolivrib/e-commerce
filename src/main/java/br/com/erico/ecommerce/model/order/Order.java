@@ -33,6 +33,7 @@ public class Order extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private User customer;

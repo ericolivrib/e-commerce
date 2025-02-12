@@ -3,6 +3,7 @@ package br.com.erico.ecommerce.model.payment;
 import br.com.erico.ecommerce.model.BaseEntity;
 import br.com.erico.ecommerce.model.order.Order;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,6 +24,7 @@ public class Payment extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
@@ -37,5 +39,6 @@ public class Payment extends BaseEntity {
     private PaymentStatus status;
 
     @NotNull
+    @Min(0)
     private BigDecimal amount;
 }

@@ -24,17 +24,18 @@ public class Product extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "Name is mandatory")
+    @NotBlank
     private String name;
 
-    @NotEmpty(message = "Description is mandatory")
+    @NotBlank
     private String description;
 
-    @NotNull(message = "Price is mandatory")
+    @NotNull
+    @Min(value = 0)
     private BigDecimal price;
 
-    @NotNull(message = "Stock is mandatory")
-    @Min(value = 0, message = "Stock must be greater than zero")
+    @NotNull
+    @Min(value = 0)
     private Integer stock;
 
     @ManyToOne
