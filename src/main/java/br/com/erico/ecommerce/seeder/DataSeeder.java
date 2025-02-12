@@ -6,5 +6,5 @@ import org.springframework.context.event.EventListener;
 public interface DataSeeder {
 
     @EventListener(ContextRefreshedEvent.class)
-    void seed(ContextRefreshedEvent event);
+    void seed();
 }

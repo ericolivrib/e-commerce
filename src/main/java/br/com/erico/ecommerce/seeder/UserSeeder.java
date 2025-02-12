@@ -18,7 +18,12 @@ public class UserSeeder implements DataSeeder {
     }
 
     @Override
-    public void seed(ContextRefreshedEvent event) {
+    public void seed() {
+        seedCustomerUser();
+        seedSellerUser();
+    }
+
+    private void seedCustomerUser() {
         userRepository.findByType(UserType.CUSTOMER).ifPresentOrElse(
                 (customer) -> log.info("Customer user not required"),
                 () -> {
@@ -31,7 +36,9 @@ public class UserSeeder implements DataSeeder {
                     log.info("Customer user seeded");
                 }
         );
+    }
 
+    private void seedSellerUser() {
         userRepository.findByType(UserType.SELLER).ifPresentOrElse(
                 (seller) -> log.info("Seller user not required"),
                 () -> {
