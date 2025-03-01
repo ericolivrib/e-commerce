@@ -5,7 +5,6 @@ import br.com.erico.ecommerce.model.user.UserRepository;
 import br.com.erico.ecommerce.model.user.UserType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.event.ContextRefreshedEvent;
 
 @Slf4j
 @Configuration
